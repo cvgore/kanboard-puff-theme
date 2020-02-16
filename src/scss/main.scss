@@ -1,2 +1,6 @@
 @import 'feather.css';
 @import '~bulma';
+
+#tooltip-container {
+	z-index: $navbar-z + 10;
+}

@@ -3,6 +3,7 @@
 namespace Kanboard\Plugin\Puff;
 
 use Kanboard\Core\Plugin\Base;
+use Kanboard\Plugin\Puff\Custom\Helper\AppHelper as CustomAppHelper;
 use Kanboard\Plugin\Puff\Custom\Helper\ModalHelper as CustomModalHelper;
 use Kanboard\Plugin\Puff\Custom\Helper\UrlHelper as CustomUrlHelper;
 
@@ -21,9 +22,12 @@ class Plugin extends Base
 	 */
 	public function initialize(): void
 	{
+//		return;
 		$this->container['helper']->register('modal', CustomModalHelper::class);
 		$this->container['helper']->register('url', CustomUrlHelper::class);
+		$this->container['helper']->register('app', CustomAppHelper::class);
 
+		$this->template->setTemplateOverride('layout', 'puff:layout/layout');
 		$this->template->setTemplateOverride('header', 'puff:layout/header');
 		$this->template->setTemplateOverride('header/title', 'puff:header/title');
 		$this->template->setTemplateOverride('header/user_notifications', 'puff:header/user_notifications');
