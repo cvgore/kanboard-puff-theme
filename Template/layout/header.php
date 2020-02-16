@@ -18,11 +18,11 @@ $_title = $this->render('header/title', [
 				<?php endif ?>
 			</div>
 		</div>
-	</div>
 
-	<div class="navbar-end">
-		<?= $this->render('header/user_notifications') ?>
-		<?= $this->render('header/creation_dropdown') ?>
-		<?= $this->render('header/user_dropdown') ?>
+		<div class="navbar-end">
+			<?= $this->render('header/user_notifications') ?>
+			<?= $this->render('header/creation_dropdown') ?>
+			<?= $this->render('header/user_dropdown') ?>
+		</div>
 	</div>
 </nav>

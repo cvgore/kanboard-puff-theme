@@ -33,6 +33,11 @@ class Plugin extends Base
 		$this->template->setTemplateOverride('header/user_notifications', 'puff:header/user_notifications');
 		$this->template->setTemplateOverride('header/creation_dropdown', 'puff:header/creation_dropdown');
 		$this->template->setTemplateOverride('header/user_dropdown', 'puff:header/user_dropdown');
+		$this->template->setTemplateOverride('dashboard/layout', 'puff:dashboard/layout');
+		$this->template->setTemplateOverride('dashboard/overview', 'puff:dashboard/overview');
+		$this->template->setTemplateOverride('app/filters_helper', 'puff:app/filters_helper');
+		$this->template->setTemplateOverride('project_list/header', 'puff:project_list/header');
+		$this->template->setTemplateOverride('project_list/sort_menu', 'puff:project_list/sort_menu');
 
 		if ($this->runningWebpackDevServer()) {
 //			$this->hook->on('template:layout:css', ['template' => "/{$this->getWebpackDevServerAddress()}/puff.min.css"]);

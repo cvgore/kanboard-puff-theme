@@ -13,14 +13,14 @@
 	<?php endif ?>
 
 	<?= $this->asset->colorCss() ?>
-	        <?= $this->asset->css('assets/css/vendor.min.css') ?>
-	        <?= $this->asset->css('assets/css/app.min.css') ?>
+    <?= $this->asset->css('assets/css/vendor.min.css') ?>
+	<?= $this->asset->css('assets/css/app.min.css') ?>
 	<?= $this->asset->css('assets/css/print.min.css', true, 'print') ?>
 	<?= $this->asset->customCss() ?>
 
 	<?php if (! isset($not_editable)): ?>
-		            <?= $this->asset->js('assets/js/vendor.min.js') ?>
-		            <?= $this->asset->js('assets/js/app.min.js') ?>
+        <?= $this->asset->js('assets/js/vendor.min.js') ?>
+        <?= $this->asset->js('assets/js/app.min.js') ?>
 	<?php endif ?>
 
 	<?= $this->hook->asset('css', 'template:layout:css') ?>
@@ -63,10 +63,10 @@
 			'board_selector' => isset($board_selector) ? $board_selector : array(),
 			'project' => isset($project) ? $project : array(),
 		)) ?>
-		<section class="page">
+		<main class="container is-fluid">
 			<?= $this->app->flashMessage() ?>
 			<?= $content_for_layout ?>
-		</section>
+		</main>
 		<?= $this->hook->render('template:layout:bottom') ?>
 	<?php endif ?>
 </body>
