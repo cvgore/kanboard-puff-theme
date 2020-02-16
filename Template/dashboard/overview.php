@@ -1,76 +1,55 @@
-<nav class="level">
-	<div class="level-item">
-		<form method="get" action="<?= $this->url->dir() ?>" class="search">
-			<?= $this->form->hidden('controller', ['controller' => 'SearchController']) ?>
-			<?= $this->form->hidden('action', ['action' => 'index']) ?>
-
-			<div class="field has-addons">
-				<div class="control is-expanded">
-					<?= $this->form->text('search', [], [], ['placeholder="' . t('Search') . '"'], 'input is-small') ?>
-				</div>
-				<div class="control">
-					<?= $this->render('app/filters_helper') ?>
-				</div>
-			</div>
-		</form>
-	</div>
-</nav>
-
 <?php if (!$project_paginator->isEmpty()): ?>
 	<nav class="panel">
 		<div class="panel-heading">
 			<?= $this->render('project_list/header', ['paginator' => $project_paginator]) ?>
 		</div>
-		<?php foreach ($project_paginator->getCollection() as $project): ?>
-			<a href="<?= $this->url->href('BoardViewController', 'show', ['project_id' => $project['id']]) ?>"
-			   class="panel-block">
-				<!--			--><?php //if ($this->user->hasProjectAccess('ProjectViewController', 'show', $project['id'])): ?>
-				<!--				--><? //= $this->render('project/dropdown', ['project' => $project]) ?>
-				<!--			--><?php //else: ?>
+		<div class="panel-block">
+			<form method="get" action="<?= $this->url->dir() ?>" class="search">
+				<?= $this->form->hidden('controller', ['controller' => 'SearchController']) ?>
+				<?= $this->form->hidden('action', ['action' => 'index']) ?>
 
-				<!--			--><?php //endif ?>
-
-				<p><b><?= '#' . $project['id'] ?></b>
-				<?= $this->text->e($project['name']) ?></p>
-				<?php if ($project['is_private']): ?>
-					<i class="fi-lock" title="<?= t('Private project') ?>"></i>
-				<?php endif ?>
-			</a>
-		<?php endforeach ?>
-	</nav>
-
-	<?= $project_paginator ?>
-<?php endif ?>
-
-<?php if (!$project_paginator->isEmpty()): ?>
-	<div class="table-list">
-		<?= $this->render('project_list/header', ['paginator' => $project_paginator]) ?>
-		<?php foreach ($project_paginator->getCollection() as $project): ?>
-			<div class="table-list-row table-border-left">
-				<div>
-					<?php if ($this->user->hasProjectAccess('ProjectViewController', 'show', $project['id'])): ?>
-						<?= $this->render('project/dropdown', ['project' => $project]) ?>
-					<?php else: ?>
-						<strong><?= '#' . $project['id'] ?></strong>
-					<?php endif ?>
-
-					<span class="table-list-title <?= $project['is_active'] == 0 ? 'status-closed' : '' ?>">
-                        <?= $this->url->link($this->text->e($project['name']), 'BoardViewController', 'show', ['project_id' => $project['id']]) ?>
-                    </span>
-
-					<?php if ($project['is_private']): ?>
-						<i class="fa fa-lock fa-fw" title="<?= t('Private project') ?>"></i>
-					<?php endif ?>
+				<div class="field has-addons">
+					<div class="control is-expanded">
+						<?= $this->form->text('search', [], [], ['placeholder="' . t('Search') . '"'], 'input is-small') ?>
+					</div>
+					<div class="control">
+						<?= $this->render('app/filters_helper') ?>
+					</div>
 				</div>
-				<div class="table-list-details">
-					<?php foreach ($project['columns'] as $column): ?>
-						<strong title="<?= t('Task count') ?>"><?= $column['nb_open_tasks'] ?></strong>
-						<small><?= $this->text->e($column['title']) ?></small>
-					<?php endforeach ?>
+			</form>
+		</div>
+		<?php foreach ($project_paginator->getCollection() as $project): ?>
+			<div class="panel-block">
+				<div class="columns is-multiline is-gapless">
+					<div class="column is-12">
+						<?php if ($this->user->hasProjectAccess('ProjectViewController', 'show', $project['id'])): ?>
+							<?= $this->render('project/dropdown', ['project' => $project]) ?>
+						<?php else: ?>
+							<b><?= '#' . $project['id'] ?></b>
+						<?php endif ?>
+
+						<a href="<?= $this->url->href('BoardViewController', 'show', ['project_id' => $project['id']]) ?>">
+							<?= $this->text->e($project['name']) ?>
+						</a>
+
+						<?php if (!$project['is_private']): ?>
+							<span class="icon">
+								<i class="fi-lock" title="<?= t('Private project') ?>"></i>
+							</span>
+						<?php endif ?>
+					</div>
+					<div class="column is-12">
+						<small>
+							<?php foreach ($project['columns'] as $column): ?>
+								<strong title="<?= t('Task count') ?>"><?= $column['nb_open_tasks'] ?></strong>
+								<small><?= $this->text->e($column['title']) ?></small>
+							<?php endforeach ?>
+						</small>
+					</div>
 				</div>
 			</div>
 		<?php endforeach ?>
-	</div>
+	</nav>
 
 	<?= $project_paginator ?>
 <?php endif ?>

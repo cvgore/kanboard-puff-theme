@@ -1,12 +1,10 @@
-<div class="dropdown is-hoverable">
+<div class="dropdown is-hoverable is-right">
 	<div class="dropdown-trigger">
-		<button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu"
-		        title="<?= t('Default filters') ?>">
-			<span><?= t('Sort') ?></span>
+		<a aria-haspopup="true" aria-controls="dropdown-menu">
 			<span class="icon">
-		    <i class="fi-chevron-down"></i>
+		    <i class="fi-bar-chart"></i>
 	        </span>
-		</button>
+		</a>
 	</div>
 	<div class="dropdown-menu" id="dropdown-menu" role="menu">
 		<div class="dropdown-content">

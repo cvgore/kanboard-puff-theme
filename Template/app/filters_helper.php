@@ -1,5 +1,5 @@
 <?= $this->hook->render('template:app:filters-helper:before', isset($project) ? array('project' => $project) : array()) ?>
-<div class="dropdown is-hoverable">
+<div class="dropdown is-hoverable is-right">
 	<div class="dropdown-trigger">
 		<button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu" title="<?= t('Default filters') ?>">
             <span class="icon is-small">
