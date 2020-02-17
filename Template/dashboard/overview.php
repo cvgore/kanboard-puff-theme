@@ -65,25 +65,27 @@
 		<?php if (!$result['paginator']->isEmpty()): ?>
 			<div class="panel-heading">
 				<h6 id="project-tasks-<?= $result['project_id'] ?>" class="title is-5">
+					<?= t('Project') ?>:
 					<?= $this->url->link($this->text->e($result['project_name']), 'BoardViewController', 'show', ['project_id' => $result['project_id']]) ?>
 				</h6>
 			</div>
-			<?= $this->render('task_list/header', [
-				'paginator' => $result['paginator'],
-			]) ?>
-
-
+<!--			--><?//= $this->render('task_list/header', ['paginator' => $result['paginator']]) ?>
 
 			<?php foreach ($result['paginator']->getCollection() as $task): ?>
 				<div class="panel-block color-<?= $task['color_id'] ?>">
-					<?= $this->render('task_list/task_title', [
-						'task' => $task,
-						'redirect' => 'dashboard',
-					]) ?>
-
-					<?= $this->render('task_list/task_details', [
-						'task' => $task,
-					]) ?>
+					<div class="columns is-multiline is-gapless">
+						<div class="column is-12">
+							<?= $this->render('task_list/task_title', [
+								'task' => $task,
+								'redirect' => 'dashboard',
+							]) ?>
+						</div>
+						<div class="column is-12">
+							<?= $this->render('task_list/task_details', [
+								'task' => $task,
+							]) ?>
+						</div>
+					</div>
 
 					<?= $this->render('task_list/task_avatars', [
 						'task' => $task,

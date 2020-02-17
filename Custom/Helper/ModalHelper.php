@@ -27,4 +27,21 @@ class ModalHelper extends \Kanboard\Helper\ModalHelper
 
 		return $this->helper->url->link($html, $controller, $action, $params, false, trim($class, ' '));
 	}
+
+	public function small($icon, $label, $controller, $action, array $params = [], $class = ''): string
+	{
+		$html = '<span class="icon"><i class="fi-' . $icon . '" aria-hidden="true"></i></span><span>' . $label . '</span>';
+		$class .= ' js-modal-small';
+
+		return $this->helper->url->link($html, $controller, $action, $params, false, trim($class, ' '));
+	}
+
+	public function confirm($icon, $label, $controller, $action, array $params = [], $class = ''): string
+	{
+		$html = '<span class="icon"><i class="fi-' . $icon . '" aria-hidden="true"></i></span><span>' . $label . '</span>';
+		$class .= ' js-modal-confirm';
+
+		return $this->helper->url->link($html, $controller, $action, $params, false, trim($class, ' '));
+	}
+
 }
