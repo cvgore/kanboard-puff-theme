@@ -38,9 +38,11 @@ class Plugin extends Base
 		$this->template->setTemplateOverride('app/filters_helper', 'puff:app/filters_helper');
 		$this->template->setTemplateOverride('project_list/header', 'puff:project_list/header');
 		$this->template->setTemplateOverride('project_list/sort_menu', 'puff:project_list/sort_menu');
+		$this->template->setTemplateOverride('task_list/header', 'puff:task_list/header');
+		$this->template->setTemplateOverride('dashboard/sidebar', 'puff:dashboard/sidebar');
+		$this->template->setTemplateOverride('project/dropdown', 'puff:project/dropdown');
 
 		if ($this->runningWebpackDevServer()) {
-//			$this->hook->on('template:layout:css', ['template' => "/{$this->getWebpackDevServerAddress()}/puff.min.css"]);
 			$this->hook->on('template:layout:js', ['template' => "/{$this->getWebpackDevServerAddress()}/puff.min.js"]);
 
 			$this->setContentSecurityPolicy(['default-src' => "* data: ws: wss: 'unsafe-inline' 'unsafe-eval'"]);

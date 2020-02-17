@@ -4,7 +4,6 @@ namespace Kanboard\Plugin\Puff\Custom\Helper;
 
 class ModalHelper extends \Kanboard\Helper\ModalHelper
 {
-
 	public function mediumIcon($icon, $label, $controller, $action, array $params = [], $class = ''): string
 	{
 		$html = '<span class="icon"><i class="fi-' . $icon . '"></i></span>';
@@ -28,5 +27,4 @@ class ModalHelper extends \Kanboard\Helper\ModalHelper
 
 		return $this->helper->url->link($html, $controller, $action, $params, false, trim($class, ' '));
 	}
-
 }

@@ -33,8 +33,8 @@
 						</a>
 
 						<?php if (!$project['is_private']): ?>
-							<span class="icon">
-								<i class="fi-lock" title="<?= t('Private project') ?>"></i>
+							<span class="icon is-small">
+								<i class="fi-lock fi-inline" title="<?= t('Private project') ?>"></i>
 							</span>
 						<?php endif ?>
 					</div>
@@ -49,52 +49,58 @@
 				</div>
 			</div>
 		<?php endforeach ?>
+		<?php if (!$project_paginator->hasNothingToShow()): ?>
+			<div class="panel-block">
+				<?= $project_paginator ?>
+			</div>
+		<?php endif ?>
 	</nav>
-
-	<?= $project_paginator ?>
 <?php endif ?>
 
 <?php if (empty($overview_paginator)): ?>
-	<p class="alert"><?= t('There is nothing assigned to you.') ?></p>
+	<p class="notification is-warning"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>
 	<?php foreach ($overview_paginator as $result): ?>
+		<div class="panel">
 		<?php if (!$result['paginator']->isEmpty()): ?>
-			<div class="page-header">
-				<h2 id="project-tasks-<?= $result['project_id'] ?>"><?= $this->url->link($this->text->e($result['project_name']), 'BoardViewController', 'show', ['project_id' => $result['project_id']]) ?></h2>
+			<div class="panel-heading">
+				<h6 id="project-tasks-<?= $result['project_id'] ?>" class="title is-5">
+					<?= $this->url->link($this->text->e($result['project_name']), 'BoardViewController', 'show', ['project_id' => $result['project_id']]) ?>
+				</h6>
 			</div>
+			<?= $this->render('task_list/header', [
+				'paginator' => $result['paginator'],
+			]) ?>
 
-			<div class="table-list">
-				<?= $this->render('task_list/header', [
-					'paginator' => $result['paginator'],
-				]) ?>
 
-				<?php foreach ($result['paginator']->getCollection() as $task): ?>
-					<div class="table-list-row color-<?= $task['color_id'] ?>">
-						<?= $this->render('task_list/task_title', [
-							'task' => $task,
-							'redirect' => 'dashboard',
-						]) ?>
 
-						<?= $this->render('task_list/task_details', [
-							'task' => $task,
-						]) ?>
+			<?php foreach ($result['paginator']->getCollection() as $task): ?>
+				<div class="panel-block color-<?= $task['color_id'] ?>">
+					<?= $this->render('task_list/task_title', [
+						'task' => $task,
+						'redirect' => 'dashboard',
+					]) ?>
 
-						<?= $this->render('task_list/task_avatars', [
-							'task' => $task,
-						]) ?>
+					<?= $this->render('task_list/task_details', [
+						'task' => $task,
+					]) ?>
 
-						<?= $this->render('task_list/task_icons', [
-							'task' => $task,
-						]) ?>
+					<?= $this->render('task_list/task_avatars', [
+						'task' => $task,
+					]) ?>
 
-						<?= $this->render('task_list/task_subtasks', [
-							'task' => $task,
-							'user_id' => $user['id'],
-						]) ?>
+					<?= $this->render('task_list/task_icons', [
+						'task' => $task,
+					]) ?>
 
-						<?= $this->hook->render('template:dashboard:task:footer', ['task' => $task]) ?>
-					</div>
-				<?php endforeach ?>
+					<?= $this->render('task_list/task_subtasks', [
+						'task' => $task,
+						'user_id' => $user['id'],
+					]) ?>
+
+					<?= $this->hook->render('template:dashboard:task:footer', ['task' => $task]) ?>
+				</div>
+			<?php endforeach ?>
 			</div>
 
 			<?= $result['paginator'] ?>

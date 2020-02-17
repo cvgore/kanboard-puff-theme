@@ -4,10 +4,23 @@
 #tooltip-container {
 	z-index: $navbar-z + 10;
 }
+
 #page-header {
 	margin-top: .75rem;
-	//margin-bottom: .75rem;
 }
+
 form.search {
 	width: 100%;
+}
+
+.fi- {
+	&inline {
+		font-size: .9rem;
+	}
+}
+
+.tag {
+	&.is-entry {
+		height: 100%;
+	}
 }
